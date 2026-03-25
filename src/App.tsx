@@ -125,8 +125,8 @@ export default function App() {
               <strong className="event-popup__price">{config.priceFirstPurchase}</strong>
             </p>
             <p className="event-popup__note">
-              자세한 요금은 아래 <strong className="event-popup__ink">구입문의</strong>에서
-              확인해 주세요.
+              최초 구입 1회 결제로 프로그램 영구사용 가능합니다. 자세한 요금은 아래{' '}
+              <strong className="event-popup__ink">구입문의</strong>에서 확인해 주세요.
             </p>
             <div className="event-popup__actions">
               <button
@@ -352,7 +352,7 @@ export default function App() {
                       <span className="pricing-list__badge">오픈이벤트</span>
                     </span>
                     <span className="pricing-list__note">
-                      프로그램을 처음 이용하실 때 1회 납부합니다.
+                      최초 구입비는 1회 납부이며, 프로그램은 영구사용 가능합니다.
                     </span>
                   </dd>
                 </div>
