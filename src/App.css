@@ -312,6 +312,12 @@ main {
   letter-spacing: -0.02em;
 }
 
+.pricing-list__strike {
+  color: var(--muted);
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+}
+
 .pricing-list__note {
   font-size: 0.875rem;
   line-height: 1.55;

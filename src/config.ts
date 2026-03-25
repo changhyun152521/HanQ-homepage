@@ -18,7 +18,9 @@ export const config = {
   promoYoutubeShortId: '5MamC1wVBFY',
 
   /** 구입·유지보수 요금 (표기용) */
-  priceFirstPurchase: '50만원',
+  /** 최초 구입 정가(취소선 표기) */
+  priceFirstPurchasePrevious: '60만원',
+  priceFirstPurchase: '40만원',
   priceAnnualMaintenance: '5만원',
 
   /** 카카오톡 1:1 오픈채팅 — https://open.kakao.com/o/sXqId5mi */

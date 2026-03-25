@@ -215,6 +215,9 @@ export default function App() {
                   <dt className="pricing-list__term">최초 구입</dt>
                   <dd className="pricing-list__body">
                     <span className="pricing-list__amount">
+                      <s className="pricing-list__strike">
+                        {config.priceFirstPurchasePrevious}
+                      </s>{' '}
                       {config.priceFirstPurchase}
                     </span>
                     <span className="pricing-list__note">
