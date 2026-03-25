@@ -33,7 +33,7 @@ function publicAssetUrl(path: string): string {
 
 export default function App() {
   const [eventPopupOpen, setEventPopupOpen] = useState(() => shouldShowEventPopup())
-  const eventPopupCloseRef = useRef<HTMLButtonElement>(null)
+  const eventPopupPanelRef = useRef<HTMLDivElement>(null)
 
   const downloadHref = resolveDownloadHref(config.downloadUrl)
   const manualPdfSrc = config.manualPdfUrl
@@ -71,7 +71,7 @@ export default function App() {
     document.body.style.overflow = 'hidden'
 
     const t = window.setTimeout(() => {
-      eventPopupCloseRef.current?.focus()
+      eventPopupPanelRef.current?.focus({ preventScroll: true })
     }, 0)
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -103,10 +103,12 @@ export default function App() {
           onClick={onEventPopupBackdropClick}
         >
           <div
+            ref={eventPopupPanelRef}
             className="event-popup__panel"
             role="dialog"
             aria-modal="true"
             aria-labelledby="event-popup-title"
+            tabIndex={-1}
             onClick={onEventPopupPanelClick}
           >
             <div className="event-popup__badge">오픈이벤트</div>
@@ -128,7 +130,6 @@ export default function App() {
             </p>
             <div className="event-popup__actions">
               <button
-                ref={eventPopupCloseRef}
                 type="button"
                 className="btn btn--secondary event-popup__btn"
                 onClick={closeEventPopup}

@@ -750,6 +750,10 @@ main {
   text-align: center;
 }
 
+.event-popup__panel:focus {
+  outline: none;
+}
+
 .event-popup__badge {
   display: inline-flex;
   align-items: center;
