@@ -310,12 +310,41 @@ main {
   font-weight: 600;
   color: var(--ink);
   letter-spacing: -0.02em;
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem;
 }
 
 .pricing-list__strike {
   color: var(--muted);
-  font-weight: 600;
+  font-weight: 500;
   text-decoration-thickness: 1px;
+}
+
+.pricing-list__arrow {
+  color: var(--faint);
+  font-weight: 500;
+}
+
+.pricing-list__sale {
+  color: var(--accent);
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.pricing-list__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--line));
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .pricing-list__note {

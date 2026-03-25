@@ -217,8 +217,13 @@ export default function App() {
                     <span className="pricing-list__amount">
                       <s className="pricing-list__strike">
                         {config.priceFirstPurchasePrevious}
-                      </s>{' '}
-                      {config.priceFirstPurchase}
+                      </s>
+                      <span className="pricing-list__arrow" aria-hidden>
+                        {' '}
+                        -&gt;{' '}
+                      </span>
+                      <strong className="pricing-list__sale">{config.priceFirstPurchase}</strong>
+                      <span className="pricing-list__badge">오픈이벤트</span>
                     </span>
                     <span className="pricing-list__note">
                       프로그램을 처음 이용하실 때 1회 납부합니다.
