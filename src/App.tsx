@@ -243,9 +243,13 @@ export default function App() {
 
             <p className="section__desc section__desc--contact">
               구입·결제 문의는 카카오톡{' '}
-              <strong>{config.kakaoOpenChatName}</strong> 1:1 오픈채팅 또는
+              <strong>{config.kakaoOpenChatName}</strong> 1:1 오픈채팅 또는{' '}
+              <br />
               전화(
-              <a href={`tel:${config.contactPhone.replace(/-/g, '')}`}>
+              <a
+                className="section__desc__tel"
+                href={`tel:${config.contactPhone.replace(/-/g, '')}`}
+              >
                 {config.contactPhone}
               </a>
               )로 연락해 주세요.
