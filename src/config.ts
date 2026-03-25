@@ -32,4 +32,10 @@ export const config = {
   /** 개발 표기 */
   developerBrand: '이창현수학',
   contactPhone: '010-9903-7949',
+
+  /**
+   * 오픈이벤트 팝업 — `오늘 하루 안 보기` 클릭 시 저장하는 localStorage 키
+   * 값: 사용자 로컬 날짜 `YYYY-MM-DD`
+   */
+  eventPopupHideStorageKey: 'hanq-open-event-hide-date',
 } as const

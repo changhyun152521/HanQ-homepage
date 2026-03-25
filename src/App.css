@@ -725,3 +725,129 @@ main {
   outline-offset: 2px;
   border-radius: 2px;
 }
+
+/* 오픈이벤트 팝업 */
+.event-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(20, 20, 20, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.event-popup__panel {
+  width: 100%;
+  max-width: 22rem;
+  padding: 1.5rem 1.35rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.event-popup__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  margin-bottom: 0.75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--line));
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.event-popup__title {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.event-popup__lead {
+  margin: 0 0 0.75rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.event-popup__strike {
+  color: var(--muted);
+  font-weight: 500;
+  text-decoration-thickness: 1px;
+}
+
+.event-popup__arrow {
+  color: var(--faint);
+  font-weight: 500;
+}
+
+.event-popup__price {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.event-popup__note {
+  margin: 0 0 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.event-popup__ink {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.event-popup__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 400px) {
+  .event-popup__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .event-popup__btn {
+    flex: 1;
+    min-width: 7.5rem;
+  }
+}
+
+.event-popup__btn {
+  margin: 0;
+}
+
+.event-popup__link {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.35rem;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.event-popup__link:hover {
+  color: var(--ink);
+}

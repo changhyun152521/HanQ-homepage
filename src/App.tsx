@@ -1,7 +1,25 @@
-import { useCallback, type MouseEvent } from 'react'
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
 import { config } from './config'
 import { resolveDownloadHref } from './utils/drive'
 import './App.css'
+
+const EVENT_POPUP_KEY = config.eventPopupHideStorageKey
+
+function localDateKey(): string {
+  const n = new Date()
+  const y = n.getFullYear()
+  const m = String(n.getMonth() + 1).padStart(2, '0')
+  const d = String(n.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+}
+
+function shouldShowEventPopup(): boolean {
+  try {
+    return localStorage.getItem(EVENT_POPUP_KEY) !== localDateKey()
+  } catch {
+    return true
+  }
+}
 
 function scrollToId(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
@@ -14,6 +32,9 @@ function publicAssetUrl(path: string): string {
 }
 
 export default function App() {
+  const [eventPopupOpen, setEventPopupOpen] = useState(() => shouldShowEventPopup())
+  const eventPopupCloseRef = useRef<HTMLButtonElement>(null)
+
   const downloadHref = resolveDownloadHref(config.downloadUrl)
   const manualPdfSrc = config.manualPdfUrl
     ? publicAssetUrl(config.manualPdfUrl)
@@ -30,8 +51,112 @@ export default function App() {
     scrollToId(id)
   }, [])
 
+  const closeEventPopup = useCallback(() => {
+    setEventPopupOpen(false)
+  }, [])
+
+  const hideEventPopupToday = useCallback(() => {
+    try {
+      localStorage.setItem(EVENT_POPUP_KEY, localDateKey())
+    } catch {
+      /* ignore */
+    }
+    setEventPopupOpen(false)
+  }, [])
+
+  useEffect(() => {
+    if (!eventPopupOpen) return
+
+    const prevOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    const t = window.setTimeout(() => {
+      eventPopupCloseRef.current?.focus()
+    }, 0)
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeEventPopup()
+    }
+    window.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      window.clearTimeout(t)
+      document.body.style.overflow = prevOverflow
+      window.removeEventListener('keydown', onKeyDown)
+    }
+  }, [eventPopupOpen, closeEventPopup])
+
+  const onEventPopupBackdropClick = useCallback(() => {
+    closeEventPopup()
+  }, [closeEventPopup])
+
+  const onEventPopupPanelClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+  }, [])
+
   return (
     <div className="page">
+      {eventPopupOpen ? (
+        <div
+          className="event-popup"
+          role="presentation"
+          onClick={onEventPopupBackdropClick}
+        >
+          <div
+            className="event-popup__panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="event-popup-title"
+            onClick={onEventPopupPanelClick}
+          >
+            <div className="event-popup__badge">오픈이벤트</div>
+            <h2 id="event-popup-title" className="event-popup__title">
+              최초 구입 특가 안내
+            </h2>
+            <p className="event-popup__lead">
+              정가{' '}
+              <s className="event-popup__strike">{config.priceFirstPurchasePrevious}</s>
+              <span className="event-popup__arrow" aria-hidden>
+                {' '}
+                →{' '}
+              </span>
+              <strong className="event-popup__price">{config.priceFirstPurchase}</strong>
+            </p>
+            <p className="event-popup__note">
+              자세한 요금은 아래 <strong className="event-popup__ink">구입문의</strong>에서
+              확인해 주세요.
+            </p>
+            <div className="event-popup__actions">
+              <button
+                ref={eventPopupCloseRef}
+                type="button"
+                className="btn btn--secondary event-popup__btn"
+                onClick={closeEventPopup}
+              >
+                닫기
+              </button>
+              <button
+                type="button"
+                className="btn btn--primary event-popup__btn"
+                onClick={hideEventPopupToday}
+              >
+                오늘 하루 안 보기
+              </button>
+            </div>
+            <button
+              type="button"
+              className="event-popup__link"
+              onClick={() => {
+                closeEventPopup()
+                scrollToId('contact')
+              }}
+            >
+              구입문의로 이동 →
+            </button>
+          </div>
+        </div>
+      ) : null}
+
       <header className="header">
         <div className="header__inner">
           <a
