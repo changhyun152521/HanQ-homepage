@@ -830,6 +830,9 @@ main {
 
 .event-popup__btn {
   margin: 0;
+  font-size: 0.875rem;
+  padding: 0 0.9rem;
+  white-space: nowrap;
 }
 
 .event-popup__link {
